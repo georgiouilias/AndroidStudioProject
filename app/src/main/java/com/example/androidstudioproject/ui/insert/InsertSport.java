@@ -7,8 +7,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.androidstudioproject.MainActivity;
 import com.example.androidstudioproject.R;
+import com.example.androidstudioproject.Sports;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +21,8 @@ import com.example.androidstudioproject.R;
  * create an instance of this fragment.
  */
 public class InsertSport extends Fragment {
+    EditText editText,editText1,editText2,getEditText3;
+    Button addButton;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,6 +68,36 @@ public class InsertSport extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_insert_sport, container, attachToRoot: false);
+        editText1 = view.findViewById(R.id.editText);
+        editText2 = view.findViewById(R.id.editText1);
+        editText3 = view.findViewById(R.id.editText2);
+        editText4 = view.findViewById(R.id.editText3);
+        addButton = view.findViewById(R.id.submitsport);
+        addButton.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int Var_sportid = 0;
+                try {
+                    Var_sportid = Integer.parseInt(editText1.getText().toString());
+                } catch (NumberFormatException ex) {
+                    System.out.println("Could not parse " + ex);
+                }
+                String Var_sportname = editText2.getText().toString();
+                String Var_sporttype = editText3.getText().toString();
+                String Var_sportgender = editText4.getText().toString();
+                MainActivity.myDatabase.mydaotemp().addSport(Sports);
+                Toast.makeText(getActivity(), "Egine", Toast.LENGTH_LONG).show();
+                editText1.setText("");
+                editText2.setText("");
+                editText3.setText("");
+                editText4.setText("");
+
+            }
+        }));
+
+
+
         return inflater.inflate(R.layout.fragment_insert_sport, container, false);
     }
 }
